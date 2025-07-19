@@ -1,12 +1,15 @@
 from locust import HttpUser, task, between, TaskSet, events
 import random
 import string
+import uuid
 
 HOST = "http://localhost:7070"
 
 def generate_user_id():
-    """고유한 사용자 ID를 생성하는 함수"""
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    """랜덤 문자열과 밀리초 단위 timestamp를 결합해 고유한 ID 생성하도록 변경"""
+    random_part = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    timestamp_part = str(int(time.time() * 1000)) 
+    return f"{random_part}_{timestamp_part}"
 
 def generate_password():
     """유효한 비밀번호를 생성하는 함수 (영문자와 숫자 포함)"""
